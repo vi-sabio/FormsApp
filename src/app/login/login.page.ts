@@ -10,6 +10,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
   formLogin = this.formBuilder.group({
     email: ['', Validators.compose([Validators.required, Validators.email])],
     senha: [
@@ -29,7 +30,7 @@ export class LoginPage implements OnInit {
     ],
   };
 
-  constructor(private formBuilder: FormBuilder, private UsuariosService: UsuariosService, private route: Router) {}
+  constructor(private formBuilder: FormBuilder, private usuarioService: UsuariosService, private route: Router) {}
 
   get email() {
     return this.formLogin.get('email');
@@ -41,18 +42,23 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
-  async login(){
-    if(this.formLogin.valid){
-      const email = this.formLogin.get('email').value;
-      const senha = this.formLogin.get('senha').value;
-      const usuario: Usuario = await this.UsuariosService.login(email, senha) as null as Usuario;
-      if(usuario){
-        this.route.navigateByUrl('tabs/tabs1');
-      }else{
-        alert('E-mail ou Senha inválidos!');
+  async entrar() {
+    if (this.formLogin.valid) {
+
+      if (await this.usuarioService.login(this.email.value, this.senha.value)) {
+        alert('Login com Sucesso');
+        this.route.navigateByUrl('/tabs/tab1');
+      } else {
+        alert('Falha no login');
       }
-    }else{
-      alert('Formulário Inválido');
+
+    } else {
+      alert ('Formulario Invalido');
     }
   }
+
+  registro(){
+    this.route.navigateByUrl('/registro');
+  }
 }
+

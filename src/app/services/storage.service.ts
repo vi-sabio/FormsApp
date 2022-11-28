@@ -5,33 +5,33 @@ import { Storage } from '@ionic/storage-angular';
   providedIn: 'root'
 })
 export class StorageService {
-  //esta dizendo que é nula 
+  //esta dizendo que é nula
   private _storage: Storage | null = null;
 
-  //cria a instancia para que podemos trabalhar com ionic 
+  //cria a instancia do Storage //
   constructor(private storage: Storage) {
   // chama a função init, na hora que o serviço é iniciado
     this.init();
   }
 
   async init() {
-    // a função init inicializa e chama a função init e cria a storage, caso ja criado so inicia 
+    //Inicia o banco de Dados e Verifica se já existe ou não e o cria.
     const storage = await this.storage.create();
-    this._storage = storage;
+    this.storage = storage;
   }
 
   // metodo set guarda e get pega - pra guarda a gente precisa passar dois paramentos, aonde e o que?
   public set(key: string, value: any) {
-    this._storage?.set(key, value);
+    this.storage?.set(key, value);
   }
 
   public get(key: string){
-    return this._storage?.get(key);
+    return this.storage?.get(key);
   }
 
   async remove(key: string){
-    await this._storage.remove(key);
+    await this.storage.remove(key);
   }
 }
 
-//any - qualquer 
+//any - qualquer

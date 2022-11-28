@@ -1,7 +1,7 @@
 <ion-header> </ion-header>
 
 <ion-content>
-  <form [formGroup]="formregistro">
+  <form [formGroup]="formRegistro">
     <ion-item class="registro" color="dark">
       <ion-label>Registro</ion-label>
     </ion-item>
@@ -10,6 +10,12 @@
       <ion-label position="stacked">Nome</ion-label>
       <ion-input formControlName="nome"></ion-input>
     </ion-item>
+    <ng-container *ngFor="let erro of mensagemErro.nome">
+      <ion-label
+      class="msg-erro"
+      *ngIf="nome.errors?.[erro.tipo] &&(nome.dirty || nome.touched)">
+    {{erro.aviso}}</ion-label>
+    </ng-container>
 
     <ion-item fill="outline">
       <ion-label position="stacked">E-mail</ion-label>
@@ -60,12 +66,12 @@
     </ng-container>
 
     <ion-button (click) = "salvar()" expand="block" color="success">Registrar</ion-button>
-  
+
   </form>
 
   <ion-row>
     <ion-col>
-      <ion-button (click) = "voltar()" expand="block" fill="clear" color="dark"> Voltar </ion-button>
+      <ion-button expand="block" fill="clear" color="dark"> Voltar </ion-button>
     </ion-col>
 
     <ion-col>

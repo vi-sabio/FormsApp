@@ -8,14 +8,14 @@ import { StorageService } from './storage.service';
 export class UsuariosService {
 
   listaUsuarios: Usuario[] = [];
-
+ //declarando serviço de storage//
   constructor(private storageService: StorageService) { }
 
   async login(email: string, senha: string) {
     await this.buscarTodos();
     let usuario: Usuario;
     this.listaUsuarios.filter((item => {
-      if (item.email.toLocaleLowerCase() == email.toLocaleLowerCase()) {
+      if (item.email.toLocaleLowerCase() === email.toLocaleLowerCase()) {
         usuario = item;
       }
     }));
@@ -48,7 +48,7 @@ export class UsuariosService {
   }
   async deletar(id: number) {
     await this.buscarTodos();
-    this.listaUsuarios.splice(id, 1);           // splice pega a posição e deleta apatir de uma posição e quantidade 
+    this.listaUsuarios.splice(id, 1);           // splice pega a posição e deleta apatir de uma posição e quantidade //
     this.storageService.set('usuarios', this.listaUsuarios);
   }
 
