@@ -1,19 +1,70 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>cadastroProduto</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header> </ion-header>
 
 <ion-content>
-  <ion-button (click)="mostrarProdutos()">
-    Ver Produtos
-  </ion-button>
+  <form [formGroup]="formRegistroProduto">
+    <ion-item class="registro" color="dark">
+      <ion-label>Registro</ion-label>
+    </ion-item>
 
-  <form>
+    <ion-item fill="outline">
+      <ion-label position="stacked">Nome</ion-label>
+      <ion-input formControlName="nome"></ion-input>
+    </ion-item>
+    <ng-container *ngFor="let erro of mensagemErro.nome">
+      <ion-label
+      class="msg-erro"
+      *ngIf="nome.errors?.[erro.tipo] &&(nome.dirty || nome.touched)">
+    {{erro.aviso}}</ion-label>
+    </ng-container>
+
+    <ion-item fill="outline">
+      <ion-label position="stacked">validade</ion-label>
+      <ion-input type="date" formControlName="validade"></ion-input>
+    </ion-item>
+
+    <ng-container *ngFor="let erro of mensagemErro.validade">
+      <ion-label
+        class="msg-erro"
+        *ngIf="validade.errors?.[erro.tipo] &&(validade.dirty || validade.touched)"
+        >{{erro.aviso}}</ion-label>
+    </ng-container>
+
+    <ion-item fill="outline">
+      <ion-label position="stacked">valor</ion-label>
+      <ion-input formControlName="valor" ></ion-input>
+    </ion-item>
+
+    <ng-container *ngFor="let erro of mensagemErro.valor">
+      <ion-label
+        class="msg-erro"
+        *ngIf="valor.errors?.[erro.tipo] &&(valor.dirty || valor.touched)"
+        >{{erro.aviso}}</ion-label>
+    </ng-container>
+
+    <ion-item fill="outline">
+      <ion-label position="stacked">descricao</ion-label>
+      <ion-input  formControlName="descricao"></ion-input>
+    </ion-item>
+
+    <ng-container *ngFor="let erro of mensagemErro.descricao">
+      <ion-label
+        class="msg-erro"
+        *ngIf="descricao.errors?.[erro.tipo] &&(descricao.dirty || descricao.touched)"
+        >{{erro.aviso}}</ion-label>
+    </ng-container>
+
+    <ion-button (click) = "salvar()" expand="block" color="success">Registrar</ion-button>
 
   </form>
 
-  <ion-button (click)="mostrarProdutos()">
-    Salvar
-  </ion-button>
+  <ion-row>
+    <ion-col>
+      <ion-button expand="block" fill="clear" color="dark"> Voltar </ion-button>
+    </ion-col>
+
+    <ion-col>
+      <ion-button expand="block" fill="outline" color="dark"> Limpar </ion-button>
+    </ion-col>
+
+  </ion-row>
 </ion-content>

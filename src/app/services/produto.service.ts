@@ -27,4 +27,18 @@ export class ProdutoService {
     }
     return this.listaProdutos;
   }
+
+  async salvarId(Id: number) {
+    await this.StorageService.set('IdProduto', Id);
+  }
+
+  async buscarId(){
+    const id = await this.StorageService.get('IdProduto');
+
+    if (!id) {
+      return 0;
+    }
+
+    return id;
+ }
 }

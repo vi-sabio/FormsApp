@@ -4,4 +4,5 @@ export class Produto {
   descricao: string;
   validade: string;
   preco: number;
+  valor: any;
 }
