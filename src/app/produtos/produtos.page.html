@@ -1,16 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>produtos</ion-title>
+    <ion-title>Produtos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-item *ngFor="let produto of listaProdutos">
-    <ion-label>{{produto.nome}}</ion-label>
-    <ion-label>{{produto.descricao}}</ion-label>
-    <ion-label>{{produto.validade}}</ion-label>
-    <ion-label>{{produto.valor}}</ion-label>
+    <ion-label color="gray">Nome: {{produto.nome}}</ion-label>
+    <ion-label color="info">Descrição: {{produto.descricao}}</ion-label>
+    <ion-label color="danger">Validade: {{produto.validade}}</ion-label>
+    <ion-label color="success">R$: {{produto.valor}}</ion-label>
   </ion-item>
+
+
 
   <ion-button (click)="cadastrarProduto()">
     CADASTRAR
